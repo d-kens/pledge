@@ -1,10 +1,7 @@
-import { IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
-import { RoleEnum } from "src/enum/role.enum";
-
-
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { RoleEnum } from 'src/enum/role.enum';
 
 export class CreateUserDto {
-
   @IsString()
   @IsNotEmpty()
   firstName: string;
@@ -20,7 +17,7 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   password: string;
-  
+
   @IsString()
   @IsNotEmpty()
   phoneNumber: string;
@@ -28,5 +25,4 @@ export class CreateUserDto {
   @IsEnum(RoleEnum)
   @IsOptional()
   role?: RoleEnum;
-
 }

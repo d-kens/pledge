@@ -4,10 +4,10 @@ import { NotificationDto } from '../dto/notification.dto';
 
 @Controller('messages')
 export class MessagesController {
-    constructor(private readonly messagesService: MessagesService) {}
+  constructor(private readonly messagesService: MessagesService) {}
 
-    @Post('send')
-    sendEmail(@Body() notification: NotificationDto) {
-        return this.messagesService.sendNotification(notification)
-    }
+  @Post('send')
+  async sendNotification(@Body() notification: NotificationDto) {
+    return await this.messagesService.sendNotification(notification);
+  }
 }

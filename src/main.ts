@@ -8,16 +8,15 @@ async function bootstrap() {
 
   const allowedOrigins = (process.env.ALLOWED_ORIGINS || '')
     .split(',')
-    .map(origin => origin.trim())
-    .filter(origin => origin); 
+    .map((origin) => origin.trim())
+    .filter((origin) => origin);
 
   app.enableCors({
     origin: allowedOrigins,
-    methods: ["GET", "PUT", "POST", "DELETE", "PATCH"],
-    allowedHeaders: ["content-type", "authorization"],
+    methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH'],
+    allowedHeaders: ['content-type', 'authorization'],
     credentials: true,
   });
-
 
   const port = process.env.PORT || 3000;
   await app.listen(port);

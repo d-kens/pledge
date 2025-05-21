@@ -1,5 +1,4 @@
-import { TriggerRecipientsTypeEnum } from "@novu/node";
-
+import { TriggerRecipientsTypeEnum } from '@novu/node';
 
 export class NotificationDto {
   subscriberId: string;
@@ -8,6 +7,6 @@ export class NotificationDto {
     key: TriggerRecipientsTypeEnum.SUBSCRIBER,
     name: 'Default Recipient',
   };
-  payload: any;
+  payload: Record<string, unknown>;
   attachments?: { file: string; name: string; mime: string }[];
 }

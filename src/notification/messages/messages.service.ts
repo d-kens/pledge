@@ -1,21 +1,40 @@
-import { Injectable } from '@nestjs/common';
-import { InjectNovu } from '../novu/novu.provider';
-import { Novu } from '@novu/node';
+import { Novu } from '@novu/api';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { NotificationDto } from '../dto/notification.dto';
+import * as process from 'process';
+import { TriggerResponse } from '../dto/trigger-response';
 
 @Injectable()
 export class MessagesService {
-    constructor(@InjectNovu() private readonly novu: Novu) {}
+  private readonly novu: Novu;
+  private readonly logger = new Logger(MessagesService.name);
 
-    async sendNotification(notification: NotificationDto) {
-        try {
-            const result = await this.novu.trigger(notification.workflowId, {
-                to: { subscriberId: notification.subscriberId },
-                payload: notification.payload
-            })
+  constructor() {
+    this.novu = new Novu({
+      secretKey: process.env.NOVU_API_KEY,
+    });
+  }
 
-        } catch (error) {
-            return { message: error.message }
-        }
+  async sendNotification(
+    notification: NotificationDto,
+  ): Promise<TriggerResponse> {
+    try {
+      const response = await this.novu.trigger({
+        workflowId: notification.workflowId,
+        to: { subscriberId: notification.subscriberId },
+        payload: notification.payload,
+      });
+
+      return response.result;
+    } catch (error) {
+      this.logger.error(
+        `Failed to send notification: ${JSON.stringify(error)}`,
+      );
+      throw new InternalServerErrorException('Error sending notification');
     }
+  }
 }

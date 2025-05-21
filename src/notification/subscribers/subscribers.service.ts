@@ -1,91 +1,51 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { InjectNovu } from '../novu/novu.provider';
-import { Novu } from '@novu/node';
-import { SubscriberDto } from '../dto/subscriber.dto';
-import { firstValueFrom, from } from 'rxjs';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
+import { Novu } from '@novu/api';
+import {
+  CreateSubscriberDto,
+  CreateSubscriberResponse,
+} from '../dto/subscriber.dto';
+import { SubscribersControllerCreateSubscriberResponse } from '@novu/api/models/operations';
+import * as process from 'process';
 
 @Injectable()
 export class SubscribersService {
+  private readonly novu: Novu;
   private readonly logger = new Logger(SubscribersService.name);
 
-  constructor(@InjectNovu() private readonly novu: Novu) {}
-
-  async getSubscribers() {
-    const result = await this.novu.subscribers.list();
-    return result.data;
+  constructor() {
+    this.novu = new Novu({
+      secretKey: process.env.NOVU_API_KEY,
+    });
   }
 
-  async createSubscriber(subscriber: SubscriberDto) {
-    await firstValueFrom(
-      from(
-        this.novu.subscribers.identify(subscriber.subscriberId, {
-          email: subscriber.email,
-          firstName: subscriber.firstName,
-          lastName: subscriber.lastName,
-          phone: subscriber.phone,
-          locale: 'en-KE',
-        }),
-      ),
-    )
-      .then((result) => {
-        this.logger.log('Subscriber created', result.status);
-      })
-      .catch((err) => {
-        this.logger.error('Subscriber creation error', err);
-      });
-  }
+  async createSubscriber(
+    createSubscriberDto: CreateSubscriberDto,
+  ): Promise<CreateSubscriberResponse> {
+    try {
+      const response: SubscribersControllerCreateSubscriberResponse =
+        await this.novu.subscribers.create({
+          subscriberId: createSubscriberDto.subscriberId,
+          firstName: createSubscriberDto.firstName,
+          lastName: createSubscriberDto.lastName,
+          email: createSubscriberDto.email,
+          phone: createSubscriberDto.phone,
+          avatar: createSubscriberDto.avatar,
+          locale: createSubscriberDto.locale,
+          timezone: createSubscriberDto.timezone,
+          data: createSubscriberDto.data,
+        });
 
-  async createBulkSubscribers(subscribers: SubscriberDto[]) {
-    await firstValueFrom(
-      from(
-        this.novu.subscribers.bulkCreate(
-          subscribers.map((subscriber) => ({
-            subscriberId: subscriber.subscriberId,
-            email: subscriber.email,
-            firstName: subscriber.firstName,
-            lastName: subscriber.lastName,
-            phone: `+254${subscriber.phone}`,
-            locale: 'en-KE',
-          })),
-        ),
-      ),
-    )
-      .then((result) => {
-        this.logger.log('Subscriber created', result.status);
-      })
-      .catch((err) => {
-        this.logger.error('Subscriber creation error', err);
-      });
-  }
+      return response.result;
+    } catch (error) {
+      this.logger.error(
+        `Failed to send notification: ${JSON.stringify(error)}`,
+      );
 
-  async getSubscriber(subscriberId: string) {
-    const result = await this.novu.subscribers.get(subscriberId);
-    return result.data;
-  }
-
-  async deleteSubscriber(subscriberId: string) {
-    const result = await this.novu.subscribers.delete(subscriberId);
-    return result.data;
-  }
-
-  async updateSubscriber(subscriber: SubscriberDto) {
-    console.log('subscriber updated', subscriber);
-    await firstValueFrom(
-      from(
-        this.novu.subscribers.update(subscriber.subscriberId, {
-          email: subscriber.email,
-          firstName: subscriber.firstName,
-          lastName: subscriber.lastName,
-          phone: `+254${subscriber.phone}`,
-          locale: 'en-KE',
-        }),
-      ),
-    )
-      .then((result) => {
-        this.logger.log('Subscriber updated', result.status);
-      })
-      .catch((err) => {
-        this.logger.error('Subscriber update error', err);
-      });
+      throw new InternalServerErrorException('Error sending notification');
+    }
   }
 }
