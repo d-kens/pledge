@@ -9,12 +9,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from 'src/dto/create-user.dto';
 import { User } from 'src/entity/user.entity';
 import { Repository } from 'typeorm';
-import { hash } from 'bcrypt';
 import {
   paginate,
   Pagination,
   IPaginationOptions,
 } from 'nestjs-typeorm-paginate';
+import bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -55,13 +55,12 @@ export class UsersService {
     if (existingUser) throw new ConflictException('User already exist');
 
     try {
-      const hashedPassowrd = await hash(userDto.password, 10);
+      const hashedPassowrd: string = await bcrypt.hash(userDto.password, 10);
 
       const newUser = this.usersRepository.create({
         ...userDto,
         password: hashedPassowrd,
       });
-
       return this.usersRepository.save(newUser);
     } catch (error) {
       this.logger.error(
