@@ -4,6 +4,8 @@ import { ConfigModule } from '@nestjs/config';
 import { SubscribersModule } from './notification/subscribers/subscribers.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
+import { OtpModule } from './otp/otp.module';
 import * as process from 'process';
 
 @Module({
@@ -26,6 +28,8 @@ import * as process from 'process';
     MessagesModule,
     SubscribersModule,
     UsersModule,
+    AuthModule,
+    OtpModule,
   ],
 })
 export class AppModule {}

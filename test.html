@@ -158,7 +158,7 @@
             margin-bottom: 20px;
         }
         
-        .hero-title .highlight {
+        .highlight {
             color: var(--primary);
             position: relative;
             display: inline-block;
@@ -228,9 +228,6 @@
         }
         
         .stats-card {
-            position: absolute;
-            bottom: -50px;
-            left: -80px;
             background-color: var(--white);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             border-radius: 12px;
@@ -280,6 +277,69 @@
             color: var(--gray);
             font-weight: 500;
         }
+
+         .how-it-works {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .how-it-works h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--black);
+    }
+
+    .how-it-works p.subheadline {
+      font-size: 1.1rem;
+      color: var(--gray);
+      margin-bottom: 2.5rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .step {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .step:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .step-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .step h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+    }
+
+    .step p {
+      font-size: 0.95rem;
+      color: var(--gray);
+    }
+
+    @media (max-width: 500px) {
+      .how-it-works h2 {
+        font-size: 1.75rem;
+      }
+    }
         
         /* Media Queries */
         @media (max-width: 1024px) {
@@ -323,6 +383,8 @@
                 display: block;
             }
         }
+
+
         
         @media (max-width: 576px) {
             .hero {
@@ -356,6 +418,183 @@
             .stat-label {
                 font-size: 14px;
             }
+
+
+        }
+
+
+         /* Who It's For Section */
+        .who-its-for {
+            padding: 120px 0;
+        }
+
+        .who-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .who-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .who-main-text {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 16px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .who-subtitle {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 60px;
+            line-height: 1.7;
+        }
+
+        .use-cases-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 60px;
+        }
+
+        .use-case-tag {
+            background-color: var(--white);
+            color: var(--black);
+            padding: 16px 24px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .use-case-tag:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .use-case-icon {
+            font-size: 20px;
+            color: var(--primary);
+        }
+
+        .bottom-message {
+            text-align: center;
+            background-color: var(--white);
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .bottom-message h3 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--black);
+        }
+
+        .bottom-message p {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .features-title, .who-title {
+                font-size: 36px;
+            }
+
+            .who-main-text {
+                font-size: 20px;
+            }
+
+            .features {
+                padding: 80px 0;
+            }
+
+            .who-its-for {
+                padding: 80px 0;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .feature {
+                padding: 40px 24px;
+            }
+
+            .use-cases-container {
+                gap: 12px;
+            }
+
+            .use-case-tag {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+
+            .bottom-message {
+                padding: 40px 24px;
+            }
+
+            .bottom-message h3 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .features-title, .who-title {
+                font-size: 28px;
+            }
+
+            .who-main-text {
+                font-size: 18px;
+            }
+
+            .use-case-tag {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+                padding: 16px;
+            }
+
+            .bottom-message h3 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
@@ -369,6 +608,7 @@
                 <a href="#" class="nav-link active">Home</a>
                 <a href="#" class="nav-link">Fundraising</a>
                 <a href="#" class="nav-link">Contact Us</a>
+                <a href="#" class="nav-link">Login</a>
                 <a href="#" class="cta-button">Get Started</a>
             </div>
             
@@ -385,12 +625,12 @@
                 <div class="hero-content">
                     <div class="hero-badge">Better way to fundraise</div>
                     
-                    <h1 class="hero-title">
-                        Create <span class="highlight">impact</span> with modern fundraising 
+                    <h1 class="hero-title highlight">
+                        Powering Your Cause
                     </h1>
                     
                     <p class="hero-description">
-                        A powerful platform that helps you raise funds for your cause, connect with donors, and track your progress all in one place.
+                        A transparent, accessible platform to raise funds and make a difference.
                     </p>
                     
                     <div class="hero-actions">
@@ -398,37 +638,131 @@
                         <a href="#" class="btn btn-secondary">How it works</a>
                     </div>
                 </div>
-                
-                <div class="hero-image">
-                    <img src="/api/placeholder/600/400" alt="Pledge platform interface" class="main-image">
-                    
-                    <div class="stats-card">
-                        <div class="stats-header">
-                            <div class="stats-title">Platform Statistics</div>
-                            <div class="stats-badge">Live</div>
-                        </div>
+
+
+                <div class="stats-card">
+                    <div class="stats-header">
+                        <div class="stats-title">Platform Statistics</div>
+                        <div class="stats-badge">Live</div>
+                    </div>
                         
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <div class="stat-value">$18M</div>
-                                <div class="stat-label">Funds Raised</div>
-                            </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">$18M</div>
+                            <div class="stat-label">Funds Raised</div>
+                        </div>
                             
-                            <div class="stat-item">
-                                <div class="stat-value">6.2K</div>
-                                <div class="stat-label">Campaigns</div>
-                            </div>
+                        <div class="stat-item">
+                            <div class="stat-value">6.2K</div>
+                            <div class="stat-label">Campaigns</div>
+                        </div>
                             
-                            <div class="stat-item">
-                                <div class="stat-value">98%</div>
-                                <div class="stat-label">Success Rate</div>
-                            </div>
+                        <div class="stat-item">
+                            <div class="stat-value">98%</div>
+                            <div class="stat-label">Success Rate</div>
                         </div>
                     </div>
                 </div>
+                
+                
             </div>
         </div>
     </section>
+
+    <section class="how-it-works">
+    <h2>How It Works</h2>
+    <p class="subheadline">Start fundraising in just a few simple steps.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-icon"><i class="fas fa-user-plus"></i></div>
+        <h3>Create an Account</h3>
+        <p>Sign up quickly with your email or social login to get started.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon"><i class="fas fa-bullhorn"></i></div>
+        <h3>Share Your Campaign</h3>
+        <p>Tell your story and share your fundraiser with your network.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+        <h3>Receive Donations</h3>
+        <p>Watch the support come in as donors contribute to your cause.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Track Your Progress</h3>
+        <p>See real-time updates and manage your campaign dashboard.</p>
+      </div>
+    </div>
+  </section>
+
+   <section class="who-its-for">
+        <div class="container">
+            <div class="who-header">
+                <h2 class="who-title">Who Is Pledge For?</h2>
+                <div class="who-main-text">Anyone with a cause worth supporting.</div>
+                <p class="who-subtitle">
+                    Whether you're an individual facing an emergency, a community group working on a project, 
+                    or an organization championing a cause, Pledge makes it simple to raise the funds you need. 
+                    No matter how big or small your goal, our platform is designed to help you succeed.
+                </p>
+            </div>
+
+            <div class="use-cases-container">
+                <div class="use-case-tag">
+                    <i class="fas fa-heartbeat use-case-icon"></i>
+                    <span>Medical Expenses</span>
+                </div>
+                <div class="use-case-tag">
+                    <i class="fas fa-users use-case-icon"></i>
+                    <span>Community Projects</span>
+                </div>
+                <div class="use-case-tag">
+                    <i class="fas fa-graduation-cap use-case-icon"></i>
+                    <span>Education & Schools</span>
+                </div>
+                <div class="use-case-tag">
+                    <i class="fas fa-hands-helping use-case-icon"></i>
+                    <span>NGOs & Nonprofits</span>
+                </div>
+                <div class="use-case-tag">
+                    <i class="fas fa-lightbulb use-case-icon"></i>
+                    <span>Creative Projects</span>
+                </div>
+                <div class="use-case-tag">
+                    <i class="fas fa-rocket use-case-icon"></i>
+                    <span>Startups & Innovation</span>
+                </div>
+                <div class="use-case-tag">
+                    <i class="fas fa-paw use-case-icon"></i>
+                    <span>Animal Welfare</span>
+                </div>
+                <div class="use-case-tag">
+                    <i class="fas fa-tree use-case-icon"></i>
+                    <span>Environmental Causes</span>
+                </div>
+                <div class="use-case-tag">
+                    <i class="fas fa-home use-case-icon"></i>
+                    <span>Housing & Shelter</span>
+                </div>
+                <div class="use-case-tag">
+                    <i class="fas fa-running use-case-icon"></i>
+                    <span>Sports & Athletics</span>
+                </div>
+            </div>
+
+            <div class="bottom-message">
+                <h3>Your cause deserves support</h3>
+                <p>
+                    Join thousands of successful fundraisers who have raised millions for causes that matter. 
+                    Start your campaign today and see how our community can help make your vision a reality.
+                </p>
+                <a href="#" class="cta-button">Start Fundraising Now</a>
+            </div>
+        </div>
+    </section>
+
     
     <script>
         // Add scroll effect to navbar
@@ -446,6 +780,19 @@
         mobileMenuBtn.addEventListener('click', function() {
             // Mobile menu functionality would be implemented here
             alert('Mobile menu clicked - functionality would be implemented here');
+        });
+
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', animateElements);
+
+        // Add click effects to tags
+        document.querySelectorAll('.use-case-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-4px)';
+                }, 150);
+            });
         });
     </script>
 </body>

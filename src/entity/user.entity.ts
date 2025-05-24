@@ -3,9 +3,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Otp } from './otp.entity';
 
 @Entity('users')
 export class User {
@@ -32,7 +34,7 @@ export class User {
   })
   phoneNumber: string;
 
-  @Column({ type: 'boolean', default: true })
+  @Column({ type: 'boolean', default: false })
   isEmailVerified: boolean;
 
   @Column({
@@ -50,4 +52,7 @@ export class User {
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
   updatedAt: Date;
+
+  @OneToMany(() => Otp, (otp) => otp.user)
+  otps: Otp[];
 }
