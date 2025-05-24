@@ -8,6 +8,6 @@ import { Otp } from 'src/entity/otp.entity';
   imports: [TypeOrmModule.forFeature([Otp])],
   providers: [OtpService],
   controllers: [OtpController],
-  exports: [OtpService]
+  exports: [OtpService],
 })
 export class OtpModule {}

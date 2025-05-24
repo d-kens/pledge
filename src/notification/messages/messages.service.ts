@@ -31,6 +31,8 @@ export class MessagesService {
 
       return response.result;
     } catch (error) {
+      console.log('******************');
+      console.log(error);
       this.logger.error(
         `Failed to send notification: ${JSON.stringify(error)}`,
       );

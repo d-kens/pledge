@@ -14,7 +14,8 @@ import {
   Pagination,
   IPaginationOptions,
 } from 'nestjs-typeorm-paginate';
-import bcrypt from 'bcrypt';
+
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -61,12 +62,12 @@ export class UsersService {
         ...userDto,
         password: hashedPassowrd,
       });
-      return this.usersRepository.save(newUser);
-    } catch (error) {
-      this.logger.error(
-        `Failed to send notification: ${JSON.stringify(error)}`,
-      );
 
+      const result = await this.usersRepository.save(newUser);
+
+      return result;
+    } catch (error) {
+      this.logger.error('Error creating user:', error);
       throw new InternalServerErrorException('Error creating user');
     }
   }
