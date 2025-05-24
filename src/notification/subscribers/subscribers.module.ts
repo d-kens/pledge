@@ -7,5 +7,6 @@ import { ConfigModule } from '@nestjs/config';
   imports: [ConfigModule],
   providers: [SubscribersService],
   controllers: [SubscribersController],
+  exports: [SubscribersService]
 })
 export class SubscribersModule {}

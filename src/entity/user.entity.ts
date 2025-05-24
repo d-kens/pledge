@@ -1,5 +1,6 @@
 import { RoleEnum } from 'src/enum/role.enum';
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -8,11 +9,15 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Otp } from './otp.entity';
+import { v4 as uuidv4 } from 'uuid';
 
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ name: 'public_id', type: 'uuid', unique: true, update: false })
+  publicId: string;
 
   @Column({ name: 'firstname', type: 'varchar', length: 60 })
   firstName: string;
@@ -55,4 +60,9 @@ export class User {
 
   @OneToMany(() => Otp, (otp) => otp.user)
   otps: Otp[];
+
+  @BeforeInsert()
+  generatePublicId() {
+    this.publicId = uuidv4();
+  }
 }
